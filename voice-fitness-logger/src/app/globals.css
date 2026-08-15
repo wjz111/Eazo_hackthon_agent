@@ -1,0 +1,204 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Design tokens: 构成主义 · 训练档案 ── */
+@theme inline {
+  --color-background:    var(--background);
+  --color-foreground:    var(--foreground);
+  --color-card:          var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover:       var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary:       var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary:     var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:         var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent:        var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive:   var(--destructive);
+  --color-border:        var(--border);
+  --color-input:         var(--input);
+  --color-ring:          var(--ring);
+
+  /* Brand — 标注绿 */
+  --color-brand:         #3A7A4A;
+  --color-brand-dim:     #2d5e38;
+  --color-brand-muted:   rgba(58,122,74,0.15);
+
+  /* Surface ladder — 明亮纸系 */
+  --color-surface-0:     #EBEBEA;
+  --color-surface-1:     #E0E0DE;
+  --color-surface-2:     #D4D4D2;
+  --color-surface-3:     #C8C8C6;
+
+  /* Typography — 等宽技术字体 */
+  --font-sans:           var(--font-ibm-plex-mono), "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+  --font-mono:           var(--font-ibm-plex-mono), "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+  --font-heading:        var(--font-ibm-plex-mono), "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Radii — 全部直角 (构成主义) */
+  --radius:              0px;
+  --radius-sm:           0px;
+  --radius-md:           0px;
+  --radius-lg:           0px;
+  --radius-xl:           0px;
+  --radius-2xl:          0px;
+  --radius-full:         9999px;
+
+  /* Spacing */
+  --spacing-xs:   0.25rem;
+  --spacing-sm:   0.5rem;
+  --spacing-md:   1rem;
+  --spacing-lg:   1.5rem;
+  --spacing-xl:   2rem;
+  --spacing-2xl:  3rem;
+
+  /* Shadows — 细线描边，无投影 */
+  --shadow-card:   0 0 0 1px rgba(26,26,26,0.18);
+  --shadow-inset:  inset 0 0 0 1px rgba(26,26,26,0.12);
+
+  /* Shadcn compat */
+  --color-sidebar-ring:                var(--sidebar-ring);
+  --color-sidebar-border:              var(--sidebar-border);
+  --color-sidebar-accent-foreground:   var(--sidebar-accent-foreground);
+  --color-sidebar-accent:              var(--sidebar-accent);
+  --color-sidebar-primary-foreground:  var(--sidebar-primary-foreground);
+  --color-sidebar-primary:             var(--sidebar-primary);
+  --color-sidebar-foreground:          var(--sidebar-foreground);
+  --color-sidebar:                     var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+}
+
+/* ── Root variables — 纸灰底色，日光主题 ── */
+:root {
+  --background:               #EBEBEA;
+  --foreground:               #1A1A1A;
+  --card:                     rgba(235,235,234,0.7);
+  --card-foreground:          #1A1A1A;
+  --popover:                  #E0E0DE;
+  --popover-foreground:       #1A1A1A;
+  --primary:                  #3A7A4A;
+  --primary-foreground:       #F5F5F0;
+  --secondary:                #D4D4D2;
+  --secondary-foreground:     #1A1A1A;
+  --muted:                    #D4D4D2;
+  --muted-foreground:         #6D6D66;
+  --accent:                   #3A7A4A;
+  --accent-foreground:        #F5F5F0;
+  --destructive:              oklch(0.577 0.245 27.325);
+  --border:                   rgba(26,26,26,0.18);
+  --input:                    #E0E0DE;
+  --ring:                     #3A7A4A;
+  --radius:                   0px;
+  --chart-1:                  #3A7A4A;
+  --chart-2:                  #2d5e38;
+  --chart-3:                  #6aaa7a;
+  --chart-4:                  #A8A890;
+  --chart-5:                  #6D6D66;
+  --sidebar:                  #E0E0DE;
+  --sidebar-foreground:       #1A1A1A;
+  --sidebar-primary:          #3A7A4A;
+  --sidebar-primary-foreground: #F5F5F0;
+  --sidebar-accent:           #D4D4D2;
+  --sidebar-accent-foreground: #1A1A1A;
+  --sidebar-border:           rgba(26,26,26,0.12);
+  --sidebar-ring:             #3A7A4A;
+}
+
+/* body defaults */
+body {
+  background-color: #EBEBEA;
+  color: #1A1A1A;
+  touch-action: manipulation;
+  -webkit-font-smoothing: antialiased;
+  /* 技术纸网格背景 */
+  background-image:
+    linear-gradient(rgba(26,26,26,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,26,26,0.045) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Prevent iOS WKWebView focus auto-zoom */
+@media (max-width: 640px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── 技术标注线动效 ── */
+@keyframes scan-line {
+  0%   { opacity: 0; transform: scaleX(0); }
+  30%  { opacity: 1; }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes wave-bar {
+  0%, 100% { height: 4px;  }
+  50%       { height: 20px; }
+}
+
+@keyframes fade-in-row {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes dot-in {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.animate-scan-line {
+  animation: scan-line 0.4s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.animate-blink {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+.animate-fade-in-row {
+  animation: fade-in-row 0.25s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-row 0.25s ease-out forwards;
+}
+
+.animate-dot-in {
+  animation: dot-in 0.18s ease-out forwards;
+}
+
+/* ── Halftone overlay (纯 CSS，用于技术海报感) ── */
+.halftone-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(26,26,26,0.07) 1px, transparent 1px);
+  background-size: 5px 5px;
+  pointer-events: none;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
